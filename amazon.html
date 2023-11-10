@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon.be</title>
+
+    <!-- Inclure Swiper.js -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Here are the CSS files for this page. -->
+    <link rel="stylesheet" href="styles/shared/general.css">
+    <link rel="stylesheet" href="styles/shared/amazon-header.css">
+    <link rel="stylesheet" href="styles/pages/amazon.css">
+</head>
+
+<body>
+    <div class="amazon-header">
+        <div class="amazon-header-left-section">
+            <a href="amazon.html" class="header-link">
+                <img class="amazon-logo" src="images/amazon-logo-white.png" alt="Amazon Logo">
+                <img class="amazon-mobile-logo" src="images/amazon-mobile-logo-white.png" alt="Amazon Mobile Logo">
+            </a>
+        </div>
+
+        <div class="amazon-header-middle-section">
+            <input class="search-bar" type="text" placeholder="Search">
+            <button class="search-button">
+                <img class="search-icon" src="images/icons/search-icon.png" alt="Search Icon">
+            </button>
+        </div>
+
+        <div class="amazon-header-right-section">
+            <a class="orders-link header-link" href="orders.html">
+                <span class="returns-text">Returns</span>
+                <span class="orders-text">& Orders</span>
+            </a>
+
+            <a class="cart-link header-link" href="checkout.html">
+                <img class="cart-icon" src="images/icons/cart-icon.png" alt="Cart Icon">
+                <div class="cart-quantity"></div>
+                <div class="cart-text">Cart</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="main">
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <!-- Image 1 -->
+                <div class="swiper-slide">
+                    <div class="product-container">
+                        <div class="product-image-container">
+                            <img class="product-image" src="images/products/Image 2023-11-10 at 12.55.50.jpeg"
+                                alt="Image 1">
+                        </div>
+                        <div class="product-name limit-text-to-2-lines">
+                           Aranmei Femmes Sexy Chemise de Nuit Chemise Dentelle Lingerie De Nuit V-Neck Full Slip Nuisette Nuisette
+                        </div>
+                        <div class="product-rating-container">
+                            <img class="product-rating-stars" src="images/ratings/rating-45.png"
+                                alt="Product Rating">
+                            <div class="product-rating-count link-primary">129</div>
+                        </div>
+                        <div class="product-price">$14.61</div>
+                        <div class="product-quantity-container">
+                            <select>
+                                <option selected value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <div class="product-spacer"></div>
+                        <div class="added-to-cart">
+                            <img src="images/icons/checkmark.png" alt="Checkmark Icon">
+                            Added
+                        </div>
+                        <button class="add-to-cart-button button-primary">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Image 2 -->
+                <div class="swiper-slide">
+                    <div class="product-container">
+                        <div class="product-image-container">
+                            <img class="product-image" src="images/products/Image 2023-15-10 at 12.55.50.jpeg"
+                                alt="Image 2">
+                        </div>
+                        <!-- ... Rest of the product details ... -->
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="swiper-slide">
+                    <div class="product-container">
+                        <div class="product-image-container">
+                            <img class="product-image" src="images/products/Image 2023-13-10 at 12.55.50.jpeg"
+                                alt="Image 3">
+                        </div>
+                        <!-- ... Rest of the product details ... -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- Pagination and Navigation Arrows -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <!-- Include Swiper.js -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Tableau pour stocker les articles ajoutés au panier
+        const cartItems = [];
+
+        // Sélectionnez tous les boutons "Add to Cart"
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+
+        // Parcourez les boutons et ajoutez un gestionnaire d'événements pour chaque bouton
+        addToCartButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                // Obtenez les informations de l'article à partir des éléments correspondants
+                const productContainer = document.querySelectorAll('.product-container')[index];
+                const productName = productContainer.querySelector('.product-name').textContent;
+                const productPrice = productContainer.querySelector('.product-price').textContent;
+                const quantity = parseInt(productContainer.querySelector('select').value);
+
+                // Créez un objet d'article
+                const item = {
+                    name: productName,
+                    price: productPrice,
+                    quantity: quantity,
+                };
+
+                // Ajoutez l'article au panier
+                cartItems.push(item);
+
+                // Mettez à jour la quantité dans le panier
+                const cartQuantity = document.querySelector('.cart-quantity');
+                const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+                cartQuantity.textContent = totalQuantity;
+
+                // Affichez un message "Added" sous l'article
+                const addedToCart = productContainer.querySelector('.added-to-cart');
+                addedToCart.style.display = 'block';
+
+                // Réinitialisez le sélecteur de quantité
+                productContainer.querySelector('select').value = 1;
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!-- checkout.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Checkout</title>
+
+    <!-- This code is needed for responsive design to work.
+      (Responsive design = make the website look good on
+      smaller screen sizes like a phone or a tablet). -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Load a font called Roboto from Google Fonts. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Here are the CSS files for this page. -->
+    <link rel="stylesheet" href="styles/shared/general.css">
+    <link rel="stylesheet" href="styles/pages/checkout/checkout-header.css">
+    <link rel="stylesheet" href="styles/pages/checkout/checkout.css">
+  </head>
+  <body>
+    <div class="checkout-header">
+      <div class="header-content">
+        <div class="checkout-header-left-section">
+          <a href="amazon.html">
+            <img class="amazon-logo" src="images/amazon-logo.png">
+            <img class="amazon-mobile-logo" src="images/amazon-mobile-logo.png">
+          </a>
+        </div>
+
+        <div class="checkout-header-middle-section">
+          Checkout (<a class="return-to-home-link" href="amazon.html">items</a>)
+        </div>
+
+        <div class="checkout-header-right-section">
+          <img src="images/icons/checkout-lock-icon.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="page-title">Review your order</div>
+
+      <!-- Ajoutez un conteneur pour afficher les articles du panier -->
+      <div id="cart-items-container">
+        <!-- Les articles du panier seront affichés ici -->
+      </div>
+
+      <button class="place-order-button button-primary">
+         <a href="https://buy.stripe.com/5kA2aCgNofLg9SEaER">Place your order</a>
+      </button>
+    </div>
+
+    <script>
+      // Tableau pour stocker les articles ajoutés au panier
+      const cartItems = [
+        // Vous pouvez ajouter des articles ici si vous en avez déjà dans le panier
+      ];
+
+      // Sélectionnez l'élément div où vous voulez afficher les articles du panier
+      const cartItemsContainer = document.getElementById('cart-items-container');
+
+      // Fonction pour afficher les articles du panier
+      function displayCartItems() {
+        // Effacez le contenu actuel du conteneur
+        cartItemsContainer.innerHTML = '';
+
+        // Parcourez les articles du panier et ajoutez-les au conteneur
+        cartItems.forEach((item) => {
+          const itemElement = document.createElement('div');
+          itemElement.innerHTML = `
+            <p><strong>${item.name}</strong></p>
+            <p>Price: ${item.price}</p>
+            <p>Quantity: ${item.quantity}</p>
+          `;
+          cartItemsContainer.appendChild(itemElement);
+        });
+      }
+
+      // Appelez la fonction pour afficher les articles au chargement de la page
+      displayCartItems();
+    </script>
+  </body>
+</html>
